@@ -35,6 +35,8 @@ public class FormKategori extends javax.swing.JFrame {
         btnHapus = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKategori = new javax.swing.JTable();
+        btnCetak1 = new javax.swing.JButton();
+        txtcari = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +84,27 @@ public class FormKategori extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblKategori);
 
+        btnCetak1.setText("Cetak");
+        btnCetak1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCetak1ActionPerformed(evt);
+            }
+        });
+
+        txtcari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcariActionPerformed(evt);
+            }
+        });
+        txtcari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtcariKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcariKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,6 +115,8 @@ public class FormKategori extends javax.swing.JFrame {
                 .addComponent(btnUbah)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnHapus)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCetak1)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -106,6 +131,7 @@ public class FormKategori extends javax.swing.JFrame {
                             .addComponent(txtNama)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
+            .addComponent(txtcari)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,10 +148,13 @@ public class FormKategori extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTambah)
                     .addComponent(btnUbah)
-                    .addComponent(btnHapus))
-                .addGap(18, 18, 18)
+                    .addComponent(btnHapus)
+                    .addComponent(btnCetak1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtcari, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -169,6 +198,24 @@ public class FormKategori extends javax.swing.JFrame {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_btnHapusActionPerformed
 
+    private void btnCetak1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetak1ActionPerformed
+        crud.tampilLaporan("src/Laporan/laporankategori.jrxml", "select * from kategori");        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCetak1ActionPerformed
+
+    private void txtcariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcariActionPerformed
+
+    private void txtcariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcariKeyReleased
+        String c=txtcari.getText();
+        String sql="select*from kategori where kategori_id  like '%"+c+"%' or nama_kategori like '%"+c+"%' or keterangan like '%"+c+"%'";
+        crud.tampilDataKategori(tblKategori, sql);
+    }//GEN-LAST:event_txtcariKeyReleased
+
+    private void txtcariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcariKeyTyped
+
+    }//GEN-LAST:event_txtcariKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -205,6 +252,7 @@ public class FormKategori extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCetak1;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton btnUbah;
@@ -214,5 +262,6 @@ public class FormKategori extends javax.swing.JFrame {
     private javax.swing.JTable tblKategori;
     private javax.swing.JTextField txtKeterangan;
     private javax.swing.JTextField txtNama;
+    private javax.swing.JTextField txtcari;
     // End of variables declaration//GEN-END:variables
 }
